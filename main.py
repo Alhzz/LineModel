@@ -17,6 +17,10 @@ def predict():
     if request.method == 'POST':
         # we will get the file from the request
         file = request.form['file']
+        # convert that to bytes
+        # img_bytes = file.read()
+        print(file)
+        # class_names = ['Crateva', 'Ficus', 'Tacca', 'Tiliacora', 'Uvaria']
         class_names = ['Alstonia', 'Alyxia', 'Andrographis', 'Antidesma', 'Averrhoa', 'Capparis', 'Cardiospermum', 'Cinchona', 'CordylineA', 'CordylineB', 'Crateva', 'Eurycoma', 'Ficus', 'Garcinia', 'Graptophyllum', 'Hrrisonia', 'Tacca', 'Tiliacora', 'Tinospora', 'Uvaria']
 
         # Check if a GPU is available
@@ -56,4 +60,4 @@ def predict():
         return jsonify({'class_name': class_names[preds]})
 
 if __name__ == '__main__':
-    app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
+    app.run()
