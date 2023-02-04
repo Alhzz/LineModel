@@ -16,9 +16,9 @@ app = Flask(__name__)
 def predict():
     if request.method == 'POST':
         # we will get the file from the request
-        file = request.form['file']
+        file = request.files['file']
         # convert that to bytes
-        # img_bytes = file.read()
+        img_bytes = file.read()
         print(file)
         # class_names = ['Crateva', 'Ficus', 'Tacca', 'Tiliacora', 'Uvaria']
         class_names = ['Alstonia', 'Alyxia', 'Andrographis', 'Antidesma', 'Averrhoa', 'Capparis', 'Cardiospermum', 'Cinchona', 'CordylineA', 'CordylineB', 'Crateva', 'Eurycoma', 'Ficus', 'Garcinia', 'Graptophyllum', 'Hrrisonia', 'Tacca', 'Tiliacora', 'Tinospora', 'Uvaria']
@@ -34,7 +34,8 @@ def predict():
 
         def image_loader(image_name):
             # load and manage an image
-            image = Image.open(image_name).convert('RGB')
+            image = Image.open(io.BytesIO(image_name))
+            image = image.convert('RGB')
             image = loader(image)
             image = image.float()
             image = Variable(image, requires_grad=True)
@@ -49,8 +50,7 @@ def predict():
         model = torch.load(model_path, map_location=device)
 
         # Load image
-        image_path = file
-        image = image_loader(image_path)
+        image = image_loader(img_bytes)
 
         model.eval()
 
