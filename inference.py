@@ -16,7 +16,7 @@ app = Flask(__name__)
 def predict():
     if request.method == 'POST':
         # we will get the file from the request
-        file = request.files['file']
+        file = request.form['file']
         # convert that to bytes
         img_bytes = file.read()
         print(file)
