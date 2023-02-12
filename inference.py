@@ -7,7 +7,7 @@ import json
 from flask import Flask, jsonify, request, json
 
 """ Prepre necesary thing """
-# FLASK_ENV=development FLASK_APP=inference.py flask run
+# FLASK_DEBUG=0 FLASK_APP=inference.py flask run
 app = Flask(__name__)
 
 # Name of an exist class
@@ -60,4 +60,4 @@ def predict():
         return jsonify({'class_name': class_names[preds]})
 
 if __name__ == '__main__':
-    app.run()
+   app.run(debug=False, )
