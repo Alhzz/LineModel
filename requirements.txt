@@ -1,3 +1,5 @@
-Flask==2.1.0
+flask 
+gunicorn 
+requests
 torch
 torchvision
